@@ -9,3 +9,4 @@
     - https://www.youtube.com/watch?v=3MqJzMvHE3E
     - https://www.youtube.com/watch?v=D3fnGG7cdjY
     - https://www.youtube.com/watch?v=yNBe34Xe1Eg
+    - http://www.code-spot.co.za/2009/10/08/15-steps-to-implemented-a-neural-net/
