@@ -1,6 +1,7 @@
 # Links for projects
 
  1. Neural Network
+    - https://learnopencv.com/
     - https://towardsdatascience.com/step-by-step-guide-to-building-your-own-neural-network-from-scratch-df64b1c5ab6e
     - https://www.youtube.com/watch?v=j5YwP292YRg
     - https://www.youtube.com/watch?v=y4Y1R2wHeIY
