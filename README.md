@@ -27,5 +27,5 @@
 
 <p>
   <h2 id="4">25.8.2022</h2>
-  Nun hatten wir schon ein Template für unsere eigenen Modifikationen. Bis jetzt konnte das Neural Network nur erkennen ob in einem Array genau zwei mal "1" vorkommt... Dies sollte nun modularer werden mit OOP 
+  Nun hatten wir schon ein Template für unsere eigenen Modifikationen. Bis jetzt konnte das Neural Network nur erkennen ob in einem Array genau zwei mal "1" vorkommt... Außerdem wollten wir statt genau zwei Gewichten eine Liste aus mehreren, was auch nach etlichen Fehlern so halb funktionierte.
 </p>
