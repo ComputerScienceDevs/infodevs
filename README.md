@@ -7,6 +7,8 @@
     <td><a href="#2"> 18.8.2022 </a></td>
     <td><a href="#3"> 24.8.2022 </a></td>
     <td><a href="#4"> 25.8.2022 </a></td>
+    <td><a href="#5"> 31.8.2022 </a></td>
+    <td><a href="#6"> 1.9.2022 </a></td>
   </tr>
 </table>
 
@@ -28,4 +30,14 @@
 <p>
   <h2 id="4">25.8.2022</h2>
   Nun hatten wir schon ein Template für unsere eigenen Modifikationen. Bis jetzt konnte das Neural Network nur erkennen ob in einem Array genau zwei mal "1" vorkommt... Außerdem wollten wir statt genau zwei Gewichten eine Liste aus mehreren, was auch nach etlichen Fehlern so halb funktionierte.
+</p>
+
+<p>
+  <h2 id="5">31.8.2022</h2>
+  Heute hat Henry (alleine) angefangen sich mit mehr als zwei Layern auseinanderzusetzen.
+</p>
+
+<p>
+  <h2 id="6">1.9.2022</h2>
+  Wieder vereint haben wir nochmal mit 4 Augen und zwei Köpfen an den mehreren Layern gearbeitet, sind aber noch nicht zu einem ergebnis gekommen.
 </p>
