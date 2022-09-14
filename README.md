@@ -45,5 +45,5 @@
 
 <p>
   <h2 id="7">8.9.2022</h2>
-  Heute haben wir uns dazu entschlossen, uns weniger auf die AI Seite zu konzentrieren, als auf die Input/Output Art. Also arbeiten wir jetzt an einer PHP basierten version mit der Bilderkennungs-AI von Google, als unsere Basis.
+  Heute haben wir uns dazu entschlossen, uns weniger auf die AI Seite zu konzentrieren, als auf die Input/Output Art. Also arbeiten wir jetzt an einer PHP basierten version mit der Bilderkennungs-AI von Google "Tensorflow", als unsere Basis.
 </p>
