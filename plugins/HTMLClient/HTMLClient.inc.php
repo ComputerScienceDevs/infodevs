@@ -32,7 +32,7 @@ namespace HTMLClient {
             $this->opts = $options;
     
             if(isset($options["id"])) {
-                $this->tagEv = tag."#".$options["id"];
+                $this->tagEv = $this->tag."#".$options["id"];
             }
     
             $events[$this->tagEv."Begin"]   = array(
