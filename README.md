@@ -9,6 +9,7 @@
     <td><a href="#4"> 25.8.2022 </a></td>
     <td><a href="#5"> 31.8.2022 </a></td>
     <td><a href="#6"> 1.9.2022 </a></td>
+    <td><a href="#7"> 8.9.2022 </a></td>
   </tr>
 </table>
 
@@ -40,4 +41,9 @@
 <p>
   <h2 id="6">1.9.2022</h2>
   Wieder vereint haben wir nochmal mit 4 Augen und zwei Köpfen an den mehreren Layern gearbeitet, sind aber noch nicht zu einem ergebnis gekommen.
+</p>
+
+<p>
+  <h2 id="7">8.9.2022</h2>
+  Heute haben wir uns dazu entschlossen, uns weniger auf die AI Seite zu konzentrieren, als auf die Input/Output Art. Also arbeiten wir jetzt an einer PHP basierten version mit der Bilderkennungs-AI von Google "Tensorflow", als unsere Basis.
 </p>
