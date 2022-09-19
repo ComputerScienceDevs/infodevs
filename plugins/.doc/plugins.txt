@@ -1,0 +1,64 @@
+1. Introduction
+--------------------------
+
+Because its easier to manage, a big part of this website is seperated in plugins.
+
+A Plugin should ...
+- have an own folder (plugins/theNameOfYourAmazingPlugin)
+    - This folder should contain a plugin.inc.php file (See 2.) and optionally other plugin specific files
+- have an entry in plugins/plugins.inc.php
+
+
+2. The plugin.inc.php file
+--------------------------
+This file have to return an array with the following structure:
+
+array(
+// Basic plugin info
+// --------------------------------------
+    "permission"    => 10,
+    "moduleName"    => "NNData",
+    "args"          => array(), // => 2.1
+// Menu entry and other args needed for
+// other plugins
+// --------------------------------------
+    "menuEntry"     => "Daten",
+    "menuPage"      => "plugins/NNData/NNData.php",
+// Events
+// --------------------------------------
+    "events"        => array() // => 2.2
+)
+
+2.1 args
+--------------------------
+Your plugin can Handle own entrys of other plugins in the plugin.inc.php
+file. It's highly recommed to save the big part of your plugin in an
+other file. Example:
+
+require_once "MyPlugin.inc.php"
+
+return array(
+    // ...
+    "args" => array(
+        "MyPluginLabel" => function($value, $plugin) {
+            MyPlugin::DoAnything($value, $plugin);
+        }
+    )
+    // ...
+)
+
+Now we can use in an other plugin.inc.php file:
+
+return array(
+    // ...
+    "MyPluginLabel" => "HalloWelt"
+    // ...
+)
+
+This will call:
+MyPlugin::DoAnything("HalloWelt", "TheNameOfThePlugin")
+
+2.2 Events
+--------------------------
+
+Note: The documentation is still in progress
