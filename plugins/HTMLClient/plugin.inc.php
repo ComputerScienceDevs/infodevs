@@ -6,8 +6,13 @@ return array(
 // --------------------------------------
     "permission"    => 1000,
     "moduleName"    => "HTMLClient",
-    "setup"         => function($value, $plugin) {
+    "setup"         => function() {
         HTMLClient\Client::setup();
-    }
+    },
+    "args"          => array(
+        "events"    => function($value, $plugin) {
+
+        }
+    )
 );
 ?>

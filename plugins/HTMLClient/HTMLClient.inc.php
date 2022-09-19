@@ -1,8 +1,10 @@
 <?php
 namespace HTMLClient {
-    const BEGIN = 0;
-    const END   = 1;
-    const MAIN  = 2;
+    const BEGIN     = 0;
+    const END       = 1;
+    const MAIN      = 2;
+
+    const CHILDS    = 3;
 
     const STR = array(
         BEGIN   => "Begin",
@@ -13,56 +15,80 @@ namespace HTMLClient {
     $events = array();
 
     class Tag {
-        public $tag;
-        public $opts;
-        public $tagEv;
-        public $auto;
+        private string  $tag;
+        private array   $opts;
+        private string  $tagEv;
+        private bool    $auto;
+
+        public array    $childs;
+
+        // Creates an event
+        private function createEvent(
+            &$EventArrayRef,
+            callable $handle
+        ) {
+            if(isset($EventArrayRef)) {
+                array_unshift($EventArrayRef, $handle);
+            }
+            else {
+                $EventArrayRef = array($handle);
+            }
+        }
     
         public function __construct(
-            $tagname,
-            $options = array(),
-            $main = NULL,
-            $Nauto = true,
+            string $tagname,
+            array $options = array(),
+            array $childs = array(),
+            bool $Nauto = false,
         ) {
+            // Global vars
             global $events;
-            $this->auto = $Nauto;
 
+            // Assign values to properties
+            $this->auto = $Nauto;
             $this->tag = strtolower($tagname);
-            $this->tagEv = $this->tag;
             $this->opts = $options;
+            $this->childs = $childs;
     
+            // Generate event base name, result should be div#content for example
+            $this->tagEv = $this->tag;
             if(isset($options["id"])) {
                 $this->tagEv = $this->tag."#".$options["id"];
             }
     
-            $events[$this->tagEv."Begin"]   = array(
+            // Event TagEvBegin
+            $this->createEvent(
+                $events[$this->tagEv."Begin"],
                 function () {
-                    $this->send(BEGIN);
+                    $this->Send(BEGIN);
                 }
             );
     
-            if($main == NULL) {
-                $events[$this->tagEv]  = array();
-            }
-            else {
-                $events[$this->tagEv]  = array($main);
-            }
-            
-            $events[$this->tagEv."End"]     = array(
+            // Event tagEv
+            $this->createEvent(
+                $events[$this->tagEv],
+                function() {
+                    $this->Send(CHILDS);
+                }
+            );
+
+            // Event TagEvEnd
+            $this->createEvent(
+                $events[$this->tagEv."End"],
                 function () {
-                    $this->send(END);
+                    $this->Send(END);
                 }
             );
     
             if($this->auto) {
-                self::Call($this, BEGIN);
-                self::Call($this, MAIN);
+                $this->Call(BEGIN);
+                $this->Call(MAIN);
             }
         }
     
-        public static function Call(Tag $Tagobj, int $what): ?int {
+        public function Call(int $what): ?int {
             global $events;
-            $EventToCall = ($Tagobj->tagEv).STR[$what];
+            $EventToCall = ($this->tagEv).STR[$what];
             $n = 0;
             foreach ($events[$EventToCall] as $handle) {
                 $handle();
@@ -74,11 +100,11 @@ namespace HTMLClient {
 
         public function __destruct() {
             if($this->auto) {
-                self::Call($this, END);
+                $this->Call(END);
             }
         }
     
-        public function send($what) {
+        public function Send($what) {
             $showOptions = false;
             
             switch($what) {
@@ -89,6 +115,13 @@ namespace HTMLClient {
                 case END:
                     echo "</";
                     break;
+                case CHILDS:
+                    foreach(array_reverse($this->childs) as $child) {
+                        $child->Call(BEGIN);
+                        $child->Call(MAIN);
+                        $child->Call(END);
+                    }
+                    return;
             }
     
             echo $this->tag;
@@ -128,9 +161,11 @@ namespace HTMLClient {
                 "HTML", array(
                     "lang" => "en"
                 ),
-                (function() {
-                    new Tag("HEAD");
-                })
+                array(
+                    new Tag("HEAD"),
+                    new Tag("BODY")
+                ),
+                true
             );
         }
     }
@@ -140,7 +175,9 @@ namespace {
     ?>
     <!DOCTYPE html>
     <?php
-    HTMLClient\Client::setup();
+    if(isset($_GET["test"])) {
+        HTMLClient\Client::setup();
+    }
 }
 
 ?>
