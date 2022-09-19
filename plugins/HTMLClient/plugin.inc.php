@@ -1,5 +1,5 @@
 <?php
-require "HTMLClient.inc.php";
+require_once "HTMLClient.inc.php";
 
 return array(
 // Basic plugin info
@@ -11,7 +11,9 @@ return array(
     },
     "args"          => array(
         "events"    => function($value, $plugin) {
-
+            foreach($value as $ev => $handle) {
+                HTMLClient\addEventListener($ev, $handle);
+            }
         }
     )
 );

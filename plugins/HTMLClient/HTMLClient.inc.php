@@ -169,6 +169,16 @@ namespace HTMLClient {
             );
         }
     }
+
+    function addEventListener($ev, $handle) {
+        if(isset($events[$ev])) {
+            array_push($events[$ev], $handle);
+        }
+        else {
+            // Move createEvent in HTMLClient\ and call it would be maybe better
+            $events[$ev] = array($handle);
+        }
+    }
 }
 
 namespace {
