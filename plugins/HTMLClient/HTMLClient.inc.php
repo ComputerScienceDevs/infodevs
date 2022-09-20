@@ -109,13 +109,12 @@ namespace HTMLClient {
         public function Call(int $what): ?int {
             global $events;
             $EventToCall = ($this->tagEv).STR[$what];
-            $n = 0;
+
             foreach ($events[$EventToCall] as $handle) {
                 $handle();
-                $n++;
             }
 
-            return $n;
+            return count($events[$EventToCall]);
         }
 
         public function __destruct() {

@@ -1,5 +1,7 @@
 <?php
 
+use HTMLClient\Tag;
+
 class Menu {
     private static array $entrys;
 
@@ -33,6 +35,7 @@ class Menu {
                         "href" => $entry["url"],
                         "id"   => $id
                     ),
+                    array(),
                     content: function() use ($entry) {
                         echo $entry["label"];
                     }
@@ -45,7 +48,7 @@ class Menu {
             array(
                 "id" => "menu"
             ),
-            $entrys,
+            $EntryTags,
             auto: true
         );
 

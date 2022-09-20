@@ -12,7 +12,7 @@ return array(
         }
     ),
     "events"        => array(
-        "onBody"    => function() {
+        "body"    => function() {
             Menu::onBody();
         }
     )
