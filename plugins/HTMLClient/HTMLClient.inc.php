@@ -14,6 +14,30 @@ namespace HTMLClient {
 
     $events = array();
 
+    function addEventListener($event, $handle) {
+        global $events;
+
+        if(isset($events[$event])) {
+            array_push($events[$event], $handle);
+        }
+        else {
+            createEvent($event, $handle);
+        }
+    }
+
+    // Creates an event
+    function createEvent(
+        string $event,
+        callable $handle
+    ) {
+        if(isset($events[$event])) {
+            array_unshift($events[$event], $handle);
+        }
+        else {
+            $events[$event] = array($handle);
+        }
+    }
+
     class Tag {
         private string  $tag;
         private array   $opts;
@@ -21,31 +45,19 @@ namespace HTMLClient {
         private bool    $auto;
 
         public array    $childs;
-
-        // Creates an event
-        private function createEvent(
-            &$EventArrayRef,
-            callable $handle
-        ) {
-            if(isset($EventArrayRef)) {
-                array_unshift($EventArrayRef, $handle);
-            }
-            else {
-                $EventArrayRef = array($handle);
-            }
-        }
     
         public function __construct(
             string $tagname,
             array $options = array(),
             array $childs = array(),
-            bool $Nauto = false,
+            bool $auto = false,
+            callable $content = NULL
         ) {
             // Global vars
             global $events;
 
             // Assign values to properties
-            $this->auto = $Nauto;
+            $this->auto = $auto;
             $this->tag = strtolower($tagname);
             $this->opts = $options;
             $this->childs = $childs;
@@ -57,24 +69,31 @@ namespace HTMLClient {
             }
     
             // Event TagEvBegin
-            $this->createEvent(
-                $events[$this->tagEv."Begin"],
+            createEvent(
+                $this->tagEv."Begin",
                 function () {
                     $this->Send(BEGIN);
                 }
             );
     
             // Event tagEv
-            $this->createEvent(
-                $events[$this->tagEv],
+            createEvent(
+                $this->tagEv,
                 function() {
                     $this->Send(CHILDS);
                 }
             );
 
+            if($content != NULL) {
+                addEventListener(
+                    $this->tagEv,
+                    $content
+                );
+            }
+
             // Event TagEvEnd
-            $this->createEvent(
-                $events[$this->tagEv."End"],
+            createEvent(
+                $this->tagEv."End",
                 function () {
                     $this->Send(END);
                 }
@@ -137,28 +156,10 @@ namespace HTMLClient {
     }
     
     class Client {
-        public static function addEvent($plugin, $value) {
-            global $events;
-            foreach($value as $event => $handle) {
-                $events[$event] = $handle;
-            }
-        }
-    
-        public static function callEvent($ev) {
-            global $events;
-
-            if(!isset($events[$ev])) {
-                exit("plugins/HTMLClient/HTMLClient.inc.php at line 113: Unable to call HTML Event");
-            }
-    
-            foreach ($events[$ev] as $handle) {
-                $handle();
-            }
-        }
-    
         public static function setup() {
             new Tag(
-                "HTML", array(
+                "HTML",
+                array(
                     "lang" => "en"
                 ),
                 array(
@@ -167,16 +168,6 @@ namespace HTMLClient {
                 ),
                 true
             );
-        }
-    }
-
-    function addEventListener($ev, $handle) {
-        if(isset($events[$ev])) {
-            array_push($events[$ev], $handle);
-        }
-        else {
-            // Move createEvent in HTMLClient\ and call it would be maybe better
-            $events[$ev] = array($handle);
         }
     }
 }

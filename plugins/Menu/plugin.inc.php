@@ -5,14 +5,16 @@ return array(
 // Basic plugin info
 // --------------------------------------
     "permission"    => 1000,
-    "moduleName"    => "NNData",
+    "moduleName"    => "Menu",
     "args"          => array(
-        "menuEntry" => function($value, $plugin) {
-            Menu::AddEntry($value, $obj);
-        },
-        "menuPage"  => function($value, $plugin) {
-            Menu::AddPageRef($value, $obj);
+        "menu"      => function($value, $plugin) {
+            Menu::AddEntry($value, $plugin);
         }
     ),
+    "events"        => array(
+        "onBody"    => function() {
+            Menu::onBody();
+        }
+    )
 );
 ?>

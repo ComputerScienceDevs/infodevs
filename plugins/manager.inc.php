@@ -31,9 +31,12 @@ class PluginLoader {
         // Load setup handles
         foreach($plugins as $name => $path) {
             $config = require($path."/plugin.inc.php");
-            foreach($additionalArgs as $arg => $handle) {
+            foreach($additionalArgs as $arg => $handles) {
                 if(isset($config[$arg])) {
-                    $handle($config[$arg], $config["moduleName"]);
+                    echo "Handle $arg ...";
+                    foreach($handles as $handle) {
+                        $handle($config[$arg], $config["moduleName"]);
+                    }
                 }
             }
             if(isset($config["setup"])) {

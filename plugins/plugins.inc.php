@@ -4,6 +4,8 @@ return array(
 
 //  PluginName          Path
 //  ----------          ----
-    "HTMLClient"    => "plugins/HTMLClient"
+    "HTMLClient"    => "plugins/HTMLClient",
+    "Menu"          => "plugins/Menu",
+    "NNData"        => "plugins/NNData"
 );
 ?>
