@@ -33,7 +33,6 @@ class PluginLoader {
             $config = require($path."/plugin.inc.php");
             foreach($additionalArgs as $arg => $handles) {
                 if(isset($config[$arg])) {
-                    echo "Handle $arg ...";
                     foreach($handles as $handle) {
                         $handle($config[$arg], $config["moduleName"]);
                     }

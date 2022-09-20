@@ -30,6 +30,7 @@ namespace HTMLClient {
         string $event,
         callable $handle
     ) {
+        global $events;
         if(isset($events[$event])) {
             array_unshift($events[$event], $handle);
         }
