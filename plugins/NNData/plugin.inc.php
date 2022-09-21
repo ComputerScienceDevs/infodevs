@@ -5,8 +5,16 @@ return array(
     "permission"    => 10,
     "moduleName"    => "NNData",
     "menu"          => array(
-        "url"       => "?var=value",
+        "url"       => "?module=NNData&page=home",
         "label"     => "NNData"
+    ),
+    "pages"         => array(
+        "home"      => function() {
+            echo "Hallo Welt";
+        },
+        "GLOBHOME"  => function() {
+            echo "GlobHome";
+        }
     )
 );
 ?>

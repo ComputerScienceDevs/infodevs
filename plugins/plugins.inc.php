@@ -6,6 +6,7 @@ return array(
 //  ----------          ----
     "HTMLClient"    => "plugins/HTMLClient",
     "Menu"          => "plugins/Menu",
-    "NNData"        => "plugins/NNData"
+    "NNData"        => "plugins/NNData",
+    "PageManager"   => "plugins/PageManager"
 );
 ?>
