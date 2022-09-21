@@ -1,5 +1,6 @@
 <?php
 use HTMLClient\Tag;
+use HTMLClient\TagPos;
 
 class PageManager {
     private static $current;
@@ -17,20 +18,22 @@ class PageManager {
         }
     }
 
-    public static function Setup() {
+    public static function onBody() {
         if(!isset(self::$current)) {
             echo "Seite nicht gefunden ...";
             return;
         }
 
-        new Tag(
+        $page = new Tag(
             "DIV",
             options: array(
                 "id" => "content"
             ),
             content: self::$current,
-            auto: true
+            flags: Tag::FLAG_AUTO
         );
+
+        $page->Call(TagPos::END);
     }
 }
 

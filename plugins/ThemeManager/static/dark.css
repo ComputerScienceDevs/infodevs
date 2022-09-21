@@ -1,0 +1,9 @@
+:root {
+    --foreground: rgb(240, 240, 240);
+    --background: rgb(20,   20,  20);
+    --bar       : rgb(45,   45,  45);
+    --link      : rgb(230, 230, 230);
+    --linkH     : rgb(240, 240, 240);
+    --container : rgb(35,   35,  35);
+    --containerH: rgb(40,   40,  40);
+}

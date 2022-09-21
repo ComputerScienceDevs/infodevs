@@ -1,6 +1,7 @@
 <?php
 
 use HTMLClient\Tag;
+use HTMLClient\TagPos;
 
 class Menu {
     private static array $entrys;
@@ -49,10 +50,10 @@ class Menu {
                 "id" => "menu"
             ),
             $EntryTags,
-            auto: true
+            flags: Tag::FLAG_AUTO
         );
 
-        unset($menu);
+        $menu->Call(TagPos::END);
     }
 };
 

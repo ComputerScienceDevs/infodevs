@@ -1,0 +1,44 @@
+body{
+    color: var(--foreground);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background);
+}
+
+a {
+    color: var(--link);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a:hover {
+    color: var(--linkH);
+}
+
+button, input[type="submit"] {
+    border: none;
+    background-color: var(--container);
+    color: var(--foreground);
+    cursor: pointer;
+    padding: 5px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: var(--containerH);
+}
+
+#menu {
+    padding: 15px;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: calc(100% - 30px);
+    height: 30px;
+    background-color: var(--bar);
+}
+
+#menu a {
+    margin-right: 5px;
+}
+
+#content {
+    margin-top: 70px;
+}

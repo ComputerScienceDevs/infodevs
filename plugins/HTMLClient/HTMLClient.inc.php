@@ -1,16 +1,10 @@
 <?php
 namespace HTMLClient {
-    const BEGIN     = 0;
-    const END       = 1;
-    const MAIN      = 2;
-
-    const CHILDS    = 3;
-
-    const STR = array(
-        BEGIN   => "Begin",
-        END     => "End",
-        MAIN    => ""
-    );
+    enum TagPos : string {
+        case BEGIN  = "Begin";
+        case END    = "End";
+        case MAIN   = "";
+    }
 
     $events = array();
 
@@ -40,25 +34,44 @@ namespace HTMLClient {
     }
 
     class Tag {
+        // Properties
         private string  $tag;
         private array   $opts;
         private string  $tagEv;
-        private bool    $auto;
+        private bool    $flags;
 
+        // All childs as array
         public array    $childs;
-    
+
+        /* 
+        Flags
+        =====
+
+        Note for BaseFlags: (BaseFlag0 | Baseflag1 | BaseFlag2 | ...) should be the same as the main flag.
+        */
+
+        //           Flag             HexValue     Binary           BaseFlags
+        //           ----             --------     ------           ---------
+        public const FLAG_NONE      = 0x00;     // 0000 0000        [None]
+        public const FLAG_AUTO      = 0x01;     // 0000 0001        [None]
+        public const FLAG_SINGLE    = 0x02;     // 0000 0010        [None]
+        
+        private function isFlagSet($flag) : ?bool {
+            return(($flag & $this->flags) == $flag);
+        }
+
         public function __construct(
             string $tagname,
             array $options = array(),
             array $childs = array(),
-            bool $auto = false,
+            $flags = self::FLAG_NONE,
             callable $content = NULL
         ) {
             // Global vars
             global $events;
 
             // Assign values to properties
-            $this->auto = $auto;
+            $this->flags = $flags;
             $this->tag = strtolower($tagname);
             $this->opts = $options;
             $this->childs = $childs;
@@ -66,49 +79,53 @@ namespace HTMLClient {
             // Generate event base name, result should be div#content for example
             $this->tagEv = $this->tag;
             if(isset($options["id"])) {
-                $this->tagEv = $this->tag."#".$options["id"];
+                $this->tagEv = $this->tag."#".$this->opts["id"];
             }
     
             // Event TagEvBegin
             createEvent(
-                $this->tagEv."Begin",
+                $this->tagEv.TagPos::BEGIN->value,
                 function () {
-                    $this->Send(BEGIN);
+                    $this->Send(TagPos::BEGIN);
                 }
             );
-    
-            // Event tagEv
-            createEvent(
-                $this->tagEv,
-                function() {
-                    $this->Send(CHILDS);
-                }
-            );
-
-            if($content != NULL) {
-                addEventListener(
+            
+            if(!$this->isFlagSet(self::FLAG_SINGLE)) {
+                // Event tagEv
+                createEvent(
                     $this->tagEv,
-                    $content
+                    function() {
+                        $this->Send(TagPos::MAIN);
+                    }
+                );
+
+                if($content != NULL) {
+                    addEventListener(
+                        $this->tagEv,
+                        $content
+                    );
+                }
+
+                // Event TagEvEnd
+                createEvent(
+                    $this->tagEv.TagPos::END->value,
+                    function () {
+                        $this->Send(TagPos::END);
+                    }
                 );
             }
-
-            // Event TagEvEnd
-            createEvent(
-                $this->tagEv."End",
-                function () {
-                    $this->Send(END);
-                }
-            );
     
-            if($this->auto) {
-                $this->Call(BEGIN);
-                $this->Call(MAIN);
+            if($this->isFlagSet(self::FLAG_AUTO)) {
+                $this->Call(TagPos::BEGIN);
+                if(!$this->isFlagSet(self::FLAG_SINGLE)) {
+                    $this->Call(TagPos::MAIN);
+                }
             }
         }
     
-        public function Call(int $what): ?int {
+        public function Call(TagPos $what): ?int {
             global $events;
-            $EventToCall = ($this->tagEv).STR[$what];
+            $EventToCall = ($this->tagEv).$what->value;
 
             foreach ($events[$EventToCall] as $handle) {
                 $handle();
@@ -116,29 +133,23 @@ namespace HTMLClient {
 
             return count($events[$EventToCall]);
         }
-
-        public function __destruct() {
-            if($this->auto) {
-                $this->Call(END);
-            }
-        }
     
-        public function Send($what) {
+        public function Send(TagPos $what) {
             $showOptions = false;
             
             switch($what) {
-                case BEGIN:
+                case TagPos::BEGIN:
                     echo "<";
                     $showOptions = true;
                     break;
-                case END:
+                case TagPos::END:
                     echo "</";
                     break;
-                case CHILDS:
-                    foreach(array_reverse($this->childs) as $child) {
-                        $child->Call(BEGIN);
-                        $child->Call(MAIN);
-                        $child->Call(END);
+                case TagPos::MAIN:
+                    foreach($this->childs as $child) {
+                        $child->Call(TagPos::BEGIN);
+                        $child->Call(TagPos::MAIN);
+                        $child->Call(TagPos::END);
                     }
                     return;
             }
@@ -157,7 +168,7 @@ namespace HTMLClient {
     
     class Client {
         public static function setup() {
-            new Tag(
+            $html = new Tag(
                 "HTML",
                 array(
                     "lang" => "en"
@@ -168,6 +179,8 @@ namespace HTMLClient {
                 ),
                 true
             );
+
+            $html->Call(TagPos::END);
         }
     }
 }

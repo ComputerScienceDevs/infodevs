@@ -8,7 +8,9 @@ return array(
     "moduleName"    => "Menu",
     "args"          => array(
         "menu"      => function($value, $plugin) {
-            Menu::AddEntry($value, $plugin);
+            foreach($value as $entry) {
+                Menu::AddEntry($entry, $plugin);
+            }
         }
     ),
     "events"        => array(

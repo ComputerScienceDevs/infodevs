@@ -11,8 +11,10 @@ return array(
             PageManager::HandleArgs($value, $plugin);
         }
     ),
-    "setup"         => function() {
-        PageManager::Setup();
-    }
+    "events"        => array(
+        "body" => function() {
+            PageManager::onBody();
+        }
+    )
 )
 ?>
