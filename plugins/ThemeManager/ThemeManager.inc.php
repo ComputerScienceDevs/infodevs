@@ -24,6 +24,8 @@ namespace ThemeManager {
         public static function Init() {
             if(!isset($_COOKIE["theme"])) {
                 \setcookie("theme", Theme::Dark->value, time()+60*60*24*30);
+                header("Refresh: 0");
+                die();
             }
 
             self::UpdateCurrent();
@@ -48,7 +50,8 @@ namespace ThemeManager {
                 "link",
                 options: array(
                     "rel"   => "stylesheet",
-                    "href"  => $Tpath
+                    "href"  => $Tpath,
+                    "id"    => "ThemeCSSLink"
                 ),
                 flags: Tag::FLAG_AUTO | Tag::FLAG_SINGLE
             );
@@ -57,7 +60,8 @@ namespace ThemeManager {
                 "link",
                 options: array(
                     "rel"   => "stylesheet",
-                    "href"  => $StaticPath."base.css"
+                    "href"  => $StaticPath."base.css",
+                    "id"    => "BaseCSSLink"
                 ),
                 flags: Tag::FLAG_AUTO | Tag::FLAG_SINGLE
             );
