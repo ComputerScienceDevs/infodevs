@@ -14,9 +14,6 @@ return array(
             "label"     => "<span class=\"icon\">&#xF0EF;</span> Netzwerke"
         ),
         array(
-            "type"      => "separator"
-        ),
-        array(
             "url"       => "?module=NNData&page=home",
             "label"     => "<span class=\"icon\">&#xF1C0;</span> Daten"
         ),

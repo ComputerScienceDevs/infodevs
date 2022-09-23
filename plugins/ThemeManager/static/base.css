@@ -68,7 +68,13 @@ input:focus {
     text-decoration: none;
     float: left;
     display: block;
-    margin-top: 5px;
+    margin-top: -16px;
+    padding: 20px;
+}
+
+#menu a:hover {
+    border-bottom: 2px solid var(--foreground);
+    background-color: var(--containerH);
 }
 
 #menu #MainIcon {
