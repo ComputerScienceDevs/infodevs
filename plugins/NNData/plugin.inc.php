@@ -7,11 +7,11 @@ return array(
     "menu"          => array(
         array(
             "url"       => "?module=NNData&page=GLOBHOME",
-            "label"     => "Home"
+            "label"     => "<span class=\"icon\">&#xE800;</span> Home"
         ),
         array(
             "url"       => "?module=NNData&page=home",
-            "label"     => "NNData"
+            "label"     => "<span class=\"icon\">&#xF1C0;</span> NNData"
         )
     ),
     "pages"         => array(

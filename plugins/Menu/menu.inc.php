@@ -23,10 +23,22 @@ class Menu {
     }
 
     public static function onBody() {
-        $EntryTags = array();
+        $EntryTags = array(
+            new Tag(
+                "DIV",
+                options: array(
+                    "id"    => "MainIcon",
+                    "class" => "icon",
+                ),
+                content: function() {
+                    echo "&#xF0EF";
+                }
+            )
+        );
 
+        $index = 0;
         foreach (self::$entrys as $entry) {
-            $id = "MenuEntry".$entry["label"];
+            $id = "MenuEntry".strval($index);
 
             array_push(
                 $EntryTags,
@@ -42,6 +54,8 @@ class Menu {
                     }
                 )
             );
+
+            $index++;
         }
 
         $menu = new Tag(

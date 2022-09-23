@@ -11,6 +11,12 @@ return new Tag(
     ),
     childs: array(
         new Tag(
+            "H1",
+            content: function() {
+                echo "Einloggen";
+            }
+        ),
+        new Tag(
             "INPUT",
             options: array(
                 "type"          => "text",
@@ -19,13 +25,13 @@ return new Tag(
                 "id"            => "UsernameInput"
             )
         ),
-        new Tag(
+        /*new Tag(
             "BR",
             options: array(
                 "id"    => "LoginBR0"
             ),
             flags: Tag::FLAG_SINGLE
-        ),
+        ),*/
         new Tag(
             "INPUT",
             options: array(
@@ -35,13 +41,13 @@ return new Tag(
                 "id"            => "PasswordInput"
             )
         ),
-        new Tag(
+        /*new Tag(
             "BR",
             options: array(
                 "id"    => "LoginBR1"
             ),
             flags: Tag::FLAG_SINGLE
-        ),
+        ),*/
         new Tag(
             "BUTTON",
             options: array(

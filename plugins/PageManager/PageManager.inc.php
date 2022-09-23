@@ -5,10 +5,32 @@ use HTMLClient\TagPos;
 class PageManager {
     private static $current;
 
+    public static function onHTMLBegin() {
+        session_start();
+        
+        if(
+            !isset($_SESSION["uid"]) ||
+            $_SESSION["uid"] == NULL
+        ) {
+            $_SESSION["uid"] == NULL;
+
+            if(
+                !isset($_GET["module"]) ||
+                !isset($_GET["page"]) ||
+                $_GET["module"] != "PageManager" ||
+                $_GET["page"]   != "login"
+            ) {
+                header("Location: ?module=PageManager&page=login");
+                exit();
+            }
+        }
+    }
+
     public static function HandleArgs($value, $plugin) {
         if(!(isset($_GET["module"]) && isset($_GET["page"]))) {
             if(isset($value["GLOBHOME"])) {
-                self::$current = $value["GLOBHOME"];
+                header("Location: ?module=$plugin&page=GLOBHOME");
+                exit();
                 return;
             }
         }

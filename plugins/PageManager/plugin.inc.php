@@ -14,8 +14,11 @@ return array(
         }
     ),
     "events"        => array(
-        "body" => function() {
+        "body"      => function() {
             PageManager::onBody();
+        },
+        "htmlBegin" => function() {
+            PageManager::onHTMLBegin();
         }
     ),
     "pages"         => array(
