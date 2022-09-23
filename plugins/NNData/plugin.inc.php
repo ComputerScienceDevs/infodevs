@@ -11,7 +11,15 @@ return array(
         ),
         array(
             "url"       => "?module=NNData&page=home",
-            "label"     => "<span class=\"icon\">&#xF1C0;</span> NNData"
+            "label"     => "<span class=\"icon\">&#xF0EF;</span> Netzwerke"
+        ),
+        array(
+            "url"       => "?module=NNData&page=home",
+            "label"     => "<span id=\"seperator\"></span><span class=\"icon\">&#xF1C0;</span> Daten"
+        ),
+        array(
+            "url"       => "?module=NNData&page=home",
+            "label"     => "<span class=\"icon\">&#xE808;</span> Code"
         )
     ),
     "pages"         => array(

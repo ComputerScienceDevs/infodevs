@@ -31,7 +31,7 @@ class Menu {
                     "class" => "icon",
                 ),
                 content: function() {
-                    echo "&#xF0EF";
+                    echo "&#xF216";
                 }
             )
         );

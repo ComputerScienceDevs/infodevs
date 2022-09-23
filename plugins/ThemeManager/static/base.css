@@ -81,3 +81,10 @@ input:focus {
 #content {
     margin-top: 70px;
 }
+
+#seperator {
+    margin-right: 15px;
+    border-left-style: solid;
+    border-left-width: 1.5px;
+    border-image: linear-gradient(transparent, var(--foreground), transparent) 1;
+}
