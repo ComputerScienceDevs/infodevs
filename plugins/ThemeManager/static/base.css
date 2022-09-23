@@ -63,7 +63,7 @@ input:focus {
     border-bottom: 2px solid var(--containerH);
 }
 
-#menu a {
+#menu a, .seperator {
     margin-right: 15px;
     text-decoration: none;
     float: left;
@@ -82,8 +82,9 @@ input:focus {
     margin-top: 70px;
 }
 
-#seperator {
+.seperator {
     margin-right: 15px;
+    height: 25px;
     border-left-style: solid;
     border-left-width: 1.5px;
     border-image: linear-gradient(transparent, var(--foreground), transparent) 1;

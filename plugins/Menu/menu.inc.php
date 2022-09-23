@@ -15,7 +15,10 @@ class Menu {
     public static function AddEntry(array $value, string $plugin) {
         self::initArrays();
 
-        if(!(isset($value["label"]) && isset($value["url"]))) {
+        if(
+            !(isset($value["label"]) && isset($value["url"])) &&
+            (!isset($value["type"]) && $value["type"] != "separator")
+        ) {
             die("Error: Cannot create menu entry for plugin $plugin. \$value array is invalid.");
         }
 
@@ -40,20 +43,40 @@ class Menu {
         foreach (self::$entrys as $entry) {
             $id = "MenuEntry".strval($index);
 
-            array_push(
-                $EntryTags,
-                new Tag(
-                    "A",
-                    array(
-                        "href" => $entry["url"],
-                        "id"   => $id
-                    ),
-                    array(),
-                    content: function() use ($entry) {
-                        echo $entry["label"];
-                    }
-                )
-            );
+            $type = "entry";
+            if(isset($entry["type"])) {
+                $type = $entry["type"];
+            }
+
+            switch($type) {
+                case "entry":
+                    array_push(
+                        $EntryTags,
+                        new Tag(
+                            "A",
+                            array(
+                                "href" => $entry["url"],
+                                "id"   => $id
+                            ),
+                            array(),
+                            content: function() use ($entry) {
+                                echo $entry["label"];
+                            }
+                        )
+                    );
+                    break;
+                case "separator":
+                    array_push(
+                        $EntryTags,
+                        new Tag(
+                            "SPAN",
+                            array(
+                                "id"   => $id,
+                                "class"=> "seperator"
+                            ),
+                        )
+                    );
+            }
 
             $index++;
         }
