@@ -12,7 +12,7 @@ class PageManager {
             !isset($_SESSION["uid"]) ||
             $_SESSION["uid"] == NULL
         ) {
-            $_SESSION["uid"] == NULL;
+            $_SESSION["uid"] = NULL;
 
             if(
                 !isset($_GET["module"]) ||
