@@ -9,6 +9,7 @@ return array(
     "Menu"          => "plugins/Menu",
     "NNData"        => "plugins/NNData",
     "PageManager"   => "plugins/PageManager",
-    "ThemeManager"  => "plugins/ThemeManager"
+    "ThemeManager"  => "plugins/ThemeManager",
+    "Users"         => "plugins/Users"
 );
 ?>
