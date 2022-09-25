@@ -52,7 +52,7 @@
 ### Entwicklung der Webanwendung
 <p>
   <h3 id="8">13.9.2022</h3>
-  Heute hab ich (Henry) mir kurz im Voraus einige Gedanken zur allgemeinen Architektur der Anwendung gemacht (<a href="https://github.com/ComputerScienceDevs/infodevs/commit/cd5bcc0d3873cf604a756df54c69581c4985acb2">cd5bcc0</a>.
+  Heute hab ich (Henry) mir kurz im Voraus einige Gedanken zur allgemeinen Architektur der Anwendung gemacht (<a href="https://github.com/ComputerScienceDevs/infodevs/commit/cd5bcc0d3873cf604a756df54c69581c4985acb2">cd5bcc0</a>).
 </p>
 <p>
   <h3 id="9">14.9.2022</h3>
