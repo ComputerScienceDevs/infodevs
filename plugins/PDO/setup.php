@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup</title>
+    <link rel="stylesheet" href="../ThemeManager/static/dark.css">
+    <link rel="stylesheet" href="../ThemeManager/static/base.css">
+</head>
+<body>
 <?php
 $PDOConfig = require(".config/config.inc.php");
 $pdo = new PDO('mysql:host='.$PDOConfig["host"].';dbname='.$PDOConfig["db"].';charset=utf8', $PDOConfig["user"], $PDOConfig["pwd"]);
@@ -11,23 +22,12 @@ if ($statement->fetch()) {
 
 if(!isset($_POST["vk"]) || $_POST["vk"] != $PDOConfig["auth-key"]) {
     ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Setup</title>
-    </head>
-    <body>
-        <h1>Setup</h1>
-        <p>Please enter a valid authentication key.</p>
-        <form action="" method="post">
-            <input type="password" name="vk" id="AuthKey" placeholedr="Key">
-            <input type="submit" value="Next">
-        </form>
-    </body>
-    </html>
+    <h1>Setup</h1>
+    <p>Please enter a valid authentication key.</p>
+    <form action="" method="post">
+        <input type="password" name="vk" id="AuthKey" placeholedr="Key">
+        <input type="submit" value="Next">
+    </form>
     <?php
 }
 else if(
@@ -38,26 +38,15 @@ else if(
     $_POST["pwd"] != $_POST["pwdc"]
 ){
     ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Setup - Authenthication was succesfull.</title>
-    </head>
-    <body>
-        <h1>Create an admin account</h1>
-        <form action="" method="post">
-            <input type="hidden" name="setup-admin" value="1">
-            <input type="hidden" name="vk" value="<?php echo $_POST["vk"]; ?>">
-            <input type="text" name="user" placeholder="username">
-            <input type="password" name="pwd" placeholder="password">
-            <input type="password" name="pwdc" placeholder="check password">
-            <input type="submit" value="Submit">
-        </form>
-    </body>
-    </html>
+    <h1>Create an admin account</h1>
+    <form action="" method="post">
+        <input type="hidden" name="setup-admin" value="1">
+        <input type="hidden" name="vk" value="<?php echo $_POST["vk"]; ?>">
+        <input type="text" name="user" placeholder="username">
+        <input type="password" name="pwd" placeholder="password">
+        <input type="password" name="pwdc" placeholder="check password">
+        <input type="submit" value="Submit">
+    </form>
     <?php
 }
 else {
@@ -68,20 +57,11 @@ else {
     $statement->execute(array(0, 0, $_POST["user"], password_hash($_POST["pwd"], PASSWORD_DEFAULT)));
 
     ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Setup - Info</title>
-    </head>
-    <body>
-        <h1>Setup completed</h1>
-        <a href="../../">Homepage</a>
-    </body>
-    </html>
+    <h1>Setup completed</h1>
+    <a href="../../">Homepage</a>
     <?php
 }
 
 ?>
+</body>
+</html>
