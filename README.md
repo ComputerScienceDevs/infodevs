@@ -96,3 +96,6 @@
   <h3 id="17">25.9.2022</h3>
   Heute konnte ich (Henry) noch einmal einiges comitten, so fügte ich einen kleinen Installationsassistenten hinzu, löste <a href="https://github.com/ComputerScienceDevs/infodevs/issues/8">#8</a>(<a href="https://github.com/ComputerScienceDevs/infodevs/commit/897663cbd8186c3c9c5e9f9a82971dfeb14204a0">897663c</a>) entgültig wobei ich zudem ein neues Plugin zum Management der Datenbankverbindung entwickelte(<a href="https://github.com/ComputerScienceDevs/infodevs/commit/bd39ad4dc98511790d78a358a8d93d62af2f673d">bd39ad4</a>), fing an an einem Plugin zur Benutzerverwaltung zu arbeiten(<a href="https://github.com/ComputerScienceDevs/infodevs/commit/b3ff672775e15aa70bd7c1eba7f0b260d121651a">b3ff672</a>) und änderte noch einige kleinere Dinge (<a href="https://github.com/ComputerScienceDevs/infodevs/commit/1d48d687ba1338bfbc72a9dba001acdf768e01f5">1d48d68</a>, <a href="https://github.com/ComputerScienceDevs/infodevs/commit/3f145120c4c2b45fb13713e686863e0d051f08fa">3f14512</a>, <a href="https://github.com/ComputerScienceDevs/infodevs/commit/dd0888699b6e6d637a54b800a210a09c1c163d40">dd08886</a> und <a href="https://github.com/ComputerScienceDevs/infodevs/commit/23b389f11f813492f2d8a8bbd2c87dafe1af8724">23b389f</a>).
 </p>
+
+<h2>All commits</h2>
+<a href="https://github.com/ComputerScienceDevs/infodevs/network">Alle commits</a>
