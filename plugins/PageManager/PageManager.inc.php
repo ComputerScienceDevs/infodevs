@@ -8,11 +8,12 @@ class PageManager {
     private static $current;
     private static $allowed;
 
+    public static function is_logged_in() : ?bool {
+        return (isset($_SESSION["user"]) && $_SESSION["user"] != NULL);
+    }
+
     public static function onHTMLBegin() {
-        if(
-            !isset($_SESSION["user"]) ||
-            $_SESSION["user"] == NULL
-        ) {
+        if(!self::is_logged_in()) {
             $_SESSION["user"] = NULL;
 
             if(

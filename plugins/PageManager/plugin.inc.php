@@ -45,7 +45,18 @@ return array(
                 $LoginPage = require("login.inc.php");
                 $LoginPage->Call(TagPos::END);
             }
+        },
+        "logout"    => function() {
+            $_SESSION["user"] = NULL;
+            header("Location: ?lerror=0");
         }
-    )
+    ),
+    "menu"      => PageManager::is_logged_in() ? array(
+        array(
+            "url"   => "?module=PageManager&page=logout",
+            "label" => "<span class=\"icon\">&#xE802</span> Abmelden"
+        )
+    ) : 
+    array()
 )
 ?>
