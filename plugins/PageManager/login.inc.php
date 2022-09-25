@@ -1,6 +1,7 @@
 <?php
 
 use HTMLClient\Tag;
+use HTMLClient\TagPos;
 
 return new Tag(
     "FORM",
@@ -14,6 +15,19 @@ return new Tag(
             "H1",
             content: function() {
                 echo "Einloggen";
+                if(isset($_GET["wrongpwd"])) {
+                    $infotext = new Tag(
+                        "P",
+                        options: array(
+                            "id"    => "WrongPWDInfoTextBox"
+                        ),
+                        content: function() {
+                            echo "Username and/or password is invalid. Please try again."; 
+                        }
+                    );
+
+                    $infotext->Call(TagPos::END);
+                }
             }
         ),
         new Tag(

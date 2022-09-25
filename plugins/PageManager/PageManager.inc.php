@@ -1,18 +1,19 @@
 <?php
+session_start();
+
 use HTMLClient\Tag;
 use HTMLClient\TagPos;
 
 class PageManager {
     private static $current;
+    private static $allowed;
 
     public static function onHTMLBegin() {
-        session_start();
-        
         if(
-            !isset($_SESSION["uid"]) ||
-            $_SESSION["uid"] == NULL
+            !isset($_SESSION["user"]) ||
+            $_SESSION["user"] == NULL
         ) {
-            $_SESSION["uid"] = NULL;
+            $_SESSION["user"] = NULL;
 
             if(
                 !isset($_GET["module"]) ||
@@ -26,7 +27,23 @@ class PageManager {
         }
     }
 
+    public static function HandleArgPermission($value, $plugin) {
+        $rights = isset($_SESSION["user"]) ? $_SESSION["user"]["rights"] : 999;
+
+        if(!isset(self::$allowed)) {
+            self::$allowed = array();
+        }
+
+        if($rights < $value) {
+            array_push(self::$allowed, $plugin);
+        }
+    }
+
     public static function HandleArgs($value, $plugin) {
+        if(!in_array($plugin, self::$allowed)) {
+            return;
+        }
+
         if(!(isset($_GET["module"]) && isset($_GET["page"]))) {
             if(isset($value["GLOBHOME"])) {
                 header("Location: ?module=$plugin&page=GLOBHOME");
