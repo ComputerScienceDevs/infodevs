@@ -54,7 +54,8 @@ return array(
     "menu"      => PageManager::is_logged_in() ? array(
         array(
             "url"   => "?module=PageManager&page=logout",
-            "label" => "<span class=\"icon\">&#xE802</span> Abmelden"
+            "label" => "<span class=\"icon\">&#xE802</span> Logout",
+            "class" => "menuitem-right"
         )
     ) : 
     array()

@@ -54,11 +54,11 @@ class Menu {
                         $EntryTags,
                         new Tag(
                             "A",
-                            array(
+                            options: array(
                                 "href" => $entry["url"],
-                                "id"   => $id
+                                "id"   => $id,
+                                "class"=> isset($entry["class"]) ? $entry["class"] : "menuitem"
                             ),
-                            array(),
                             content: function() use ($entry) {
                                 echo $entry["label"];
                             }
